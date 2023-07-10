@@ -2,9 +2,17 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelEncoder
 
 # Load the dataset
 df = pd.read_csv('your_dataset.csv')
+
+# Drop rows with missing values
+df = df.dropna()
+
+# Convert non-numeric columns to numeric using label encoding
+label_encoder = LabelEncoder()
+df['Class'] = label_encoder.fit_transform(df['Class'])
 
 # Split features and labels
 X = df.drop('Class', axis=1)
